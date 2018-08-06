@@ -1,0 +1,10 @@
+[ { "author" : "sweta",
+    "version" : "1.0",
+    "name" : "MiniEdit",
+    "url" : "",
+    "rightbar" : [{
+        "action" : "codiad.mininetEditor.open();",
+        "icon" : "icon-monitor",
+        "title" : "MiniEdit"
+        }]
+  } ]

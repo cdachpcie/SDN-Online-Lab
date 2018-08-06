@@ -1,0 +1,1 @@
+<?php/*|[{"n":"MiniEdit","d":"false","a":"root-only","t":"sb-right-content","i":"keyboard","c":"sudo \/home\/ubuntu\/mininet\/examples\/miniedit.py"},{"n":"Mininet","d":"false","a":"both","t":"context-menu","i":"keyboard","c":"sudo mn"}]|*/?>
