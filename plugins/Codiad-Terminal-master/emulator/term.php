@@ -13,6 +13,8 @@
     //////////////////////////////////////////////////////////////////
     
     define('PASSWORD','terminal');
+	define('BLOCKED','pkexec');
+	define('MININET','mn');
     
     //////////////////////////////////////////////////////////////////
     // Core Stuff
@@ -104,11 +106,16 @@
             $this->command = str_replace($editors,'cat',$this->command);
             
             // Handle blocked commands
-            // $blocked = explode(',',BLOCKED);
-            // if(in_array($command_parts[0],$blocked)){
-            //     $this->command = 'echo ERROR: Command not allowed';
-            // }
-            
+            $blocked = explode(',',BLOCKED);
+			
+			if(isset($command_parts[1]) && $command_parts[1] != ''){
+				$mininet = $command_parts[1];
+			}
+			if(isset($mininet) && $mininet != MININET){
+				if(in_array($command_parts[0],$blocked)){
+					$this->command = 'echo ERROR: Command not allowed';
+				}
+			}
             // Update exec command
             $this->command_exec = $this->command . ' 2>&1';
         }
@@ -130,25 +137,31 @@
         public function Execute(){
             //system
             if(function_exists('system')){
+				//print_r($this);
                 ob_start();
                 system($this->command_exec);
+				//print_r($this);
                 $this->output = ob_get_contents();
                 ob_end_clean();
             }
             //passthru
             else if(function_exists('passthru')){
+				//print_r($this);
                 ob_start();
                 passthru($this->command_exec);
+				
                 $this->output = ob_get_contents();
                 ob_end_clean();
             }
             //exec
             else if(function_exists('exec')){
+				//print_r($this);
                 exec($this->command_exec , $this->output);
                 $this->output = implode("\n" , $output);
             }
             //shell_exec
             else if(function_exists('shell_exec')){
+				//print_r($this);
                 $this->output = shell_exec($this->command_exec);
             }
             // no support
@@ -196,6 +209,7 @@
         
         // Split &&
         $Terminal = new Terminal();
+		//print_r($Terminal);
         $output = '';
         $command = explode("&&", $command);
         foreach($command as $c){

@@ -16,6 +16,7 @@ var terminal = {
     command : $('#command input'),
     screen : $('#terminal'),
     output : $('#terminal>#output'),
+    input : $('#terminal>#input'),
     
     // Command History
     command_history : [],
@@ -95,6 +96,7 @@ var terminal = {
     },
     
     display_output : function(command,data){
+      //  terminal.output.append('<pre class="data">'+data+'</pre>');
         terminal.output.append('<pre class="command">'+command+'</pre><pre class="data">'+data+'</pre>');
         terminal.screen.scrollTop(terminal.output.height());    
     },
