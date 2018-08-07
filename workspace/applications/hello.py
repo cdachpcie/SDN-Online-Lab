@@ -1,2 +1,1 @@
-print 2+8
-djkWDLK
+print 2+8 

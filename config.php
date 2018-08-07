@@ -12,7 +12,7 @@
 define("BASE_PATH", "/opt/lampp/htdocs");
 
 // BASE URL TO CODIAD (without trailing slash)
-define("BASE_URL", "http://sdnonlinelab");
+define("BASE_URL", "http://10.0.2.15");
 
 // THEME : default, modern or clear (look at /themes)
 define("THEME", "default");

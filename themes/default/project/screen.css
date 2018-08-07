@@ -1,7 +1,14 @@
+@supports (-webkit-appearance:none) {
+    #project-list {
+    max-height: 50vh;
+    overflow: auto;
+    }
+}
+
 #project-list {
     max-height: 50vh;
     overflow: auto;
-    margin: 15px 0;
+   /* margin: 15px 0;*/
 }
 
 .project-wrapper {

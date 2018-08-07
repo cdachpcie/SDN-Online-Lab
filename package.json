@@ -1,0 +1,14 @@
+{
+  "name": "NOdeJsDemo",
+  "version": "0.0.0",
+  "description": "demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "richa",
+  "license": "mit",
+  "dependencies": {
+    "express": "~4.16.3"
+  }
+}

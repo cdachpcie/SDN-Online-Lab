@@ -11,11 +11,6 @@ require_once('header_new.php');
     //////////////////////////////////////////////////////////////////
 
     if(!isset($_SESSION['user'])){
-
-     //   $variables = BASE_URL.'/login.php';
-     //   $variable = "login.php";
-
-      //  header('Location: ' .$variable);
   ?>
   <script>
     
@@ -44,7 +39,7 @@ require_once('header_new.php');
                     <div id="finder-wrapper">
                        <a id="finder-options" class="icon icon-cog"></a>
                        <div id="finder-inner-wrapper">
-                       <input type="text" id="finder"></input>
+                            <input type="text" id="finder"></input>
                        </div>
                        <ul id="finder-options-menu" class="options-menu">
                           <li class="chosen"><a data-option="left_prefix"><?php i18n("Prefix"); ?></a></li>
@@ -66,6 +61,8 @@ require_once('header_new.php');
                         ////////////////////////////////////////////////////////////
 
                         foreach($context_menu as $menu_item=>$data){
+                            
+                           // print_r($context_menu);
 
                             if($data['title']=='Break'){
                                 echo('<hr class="'.$data['applies-to'].'">');
@@ -76,7 +73,7 @@ require_once('header_new.php');
                         }
                         
                         foreach ($plugins as $plugin){
-                             if(file_exists(PLUGINS . "/" . $plugin . "/plugin.json")) {
+                            if(file_exists(PLUGINS . "/" . $plugin . "/plugin.json")) {
                                 $pdata = file_get_contents(PLUGINS . "/" . $plugin . "/plugin.json");
                                 $pdata = json_decode($pdata,true);
                                 if(isset($pdata[0]['contextmenu'])) {
@@ -89,9 +86,8 @@ require_once('header_new.php');
                                         }
                                     }
                                 }
-                             }
+                            }
                         }
-
                 ?>
 
                 </div>
@@ -132,8 +128,7 @@ require_once('header_new.php');
 					<a href="#" class="login-link"><i class="fa fa-cog" aria-hidden="true"></i>&nbsp; Compile</a> | 
 					<a href="#" class="login-link"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Execute</a> | 
 					<a href="#" class="login-link"><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp; Share</a>
-				</div>
-						
+				</div>		
 			</div>
             
             <div id="editor-top-bar">
@@ -159,8 +154,9 @@ require_once('header_new.php');
                     // Load Plugins
                     ////////////////////////////////////////////////////////////
                     
+                    //print_r($plugins);
                     foreach ($plugins as $plugin){
-                         if(file_exists(PLUGINS . "/" . $plugin . "/plugin.json")) {
+                        if(file_exists(PLUGINS . "/" . $plugin . "/plugin.json")) {
                             $pdata = file_get_contents(PLUGINS . "/" . $plugin . "/plugin.json");
                             $pdata = json_decode($pdata,true);
                             if(isset($pdata[0]['bottombar'])) {
@@ -173,7 +169,7 @@ require_once('header_new.php');
                                     }
                                 }
                             }
-                         }
+                        }
                     }
 
                 ?>
@@ -210,6 +206,7 @@ require_once('header_new.php');
                 ////////////////////////////////////////////////////////////
 
                 foreach($right_bar as $item_rb=>$data){
+                   // print_r($data);
                     if(!isset($data['admin'])) {
                       $data['admin'] = false;
                     }
@@ -224,7 +221,7 @@ require_once('header_new.php');
                     }else if ($data['title']=='pluginbar'){
                         if(!$data['admin'] || $data['admin'] && checkAccess()) {
                             foreach ($plugins as $plugin){
-                                 if(file_exists(PLUGINS . "/" . $plugin . "/plugin.json")) {
+                                if(file_exists(PLUGINS . "/" . $plugin . "/plugin.json")) {
                                     $pdata = file_get_contents(PLUGINS . "/" . $plugin . "/plugin.json");
                                     $pdata = json_decode($pdata,true);
                                     if(isset($pdata[0]['rightbar'])) {
@@ -237,12 +234,18 @@ require_once('header_new.php');
                                         }
                                         //echo("<hr>");
                                     }
-                                 }
+                                }
                             }
                         }
                     } else{
                         if(!$data['admin'] || $data['admin'] && checkAccess()) {
-                            echo('<a onclick="'.$data['onclick'].'"><span class="'.$data['icon'].' bigger-icon"></span>'.get_i18n($data['title']).'</a>');
+                            if(isset($_SESSION) && $_SESSION['user'] =='admin'){
+                                echo('<a onclick="'.$data['onclick'].'"><span class="'.$data['icon'].' bigger-icon"></span>'.get_i18n($data['title']).'</a>');
+                            }else{
+                                if(isset($data['title']) && $data['title']!='Users'){
+                                    echo('<a onclick="'.$data['onclick'].'"><span class="'.$data['icon'].' bigger-icon"></span>'.get_i18n($data['title']).'</a>');
+                                }
+                            }
                         }
                     }
 

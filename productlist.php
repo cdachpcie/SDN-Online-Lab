@@ -1,5 +1,6 @@
  
-<?php 
+<?php
+
   //require_once('common.php');
     
     //////////////////////////////////////////////////////////////////
@@ -11,7 +12,7 @@ checkSession();
 //$_SESSION['lang'] ='en';
 //echo '<pre>';print_r($_SESSION);die;
 
-   $projects_assigned = false;
+            $projects_assigned = false;
             if(file_exists(BASE_PATH . "/data/" . $_SESSION['user'] . '_acl.php')){
                 $projects_assigned = getJSON($_SESSION['user'] . '_acl.php');
             }
@@ -138,7 +139,7 @@ margin-right: 7px;
                        <button type="button" class="btn btn-Default" data-toggle="modal" data-target="#create">Create</button>
                     </a>
                     <a href="#">
-                        <button type="button" class="btn btn-Default">Import</button>
+                        <button type="button" class="btn btn-Default" disabled="">Import</button>
                     </a>
                 </div>
                 <div class="table-responsive table-bg" id="project-list">
@@ -157,8 +158,7 @@ margin-right: 7px;
                                 <?php
             
             // Get projects JSON data
-            $projects = getJSON('projects.php');
-	  $projects = getJSON('projects.php');
+			$projects = getJSON('projects.php');
             sort($projects);
             
             function filter_by_value ($array, $index, $value){
@@ -176,19 +176,23 @@ margin-right: 7px;
                     return $newarray;
                   }
       
-            } 
+            }
+			
+			//print_r($projects);
 		
         $nResults = filter_by_value($projects, 'username', $_SESSION['user']);
             
         if(isset($_SESSION) && $_SESSION['user'] != 'admin'){
     
-            $projects = $nResults; 
+            $projects = $nResults;
+			
         }
         if(($projects) && $projects != ''){
             foreach($projects as $project=>$data){
                 $show = true;
                 if($projects_assigned && !in_array($data['path'],$projects_assigned)){ $show=false; }
-                if($show){
+               // if($show){
+					//print_r($projects);
                 ?>
                                 <tr>
                                     <td>
@@ -221,7 +225,7 @@ margin-right: 7px;
                     ?>
                                 </tr>
                                 <?php
-                }
+                //}
             }
            
 		   

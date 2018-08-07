@@ -55,15 +55,21 @@
         }
 
     //}
-
+ $query = $_SERVER['REQUEST_URI'];
+ 
+ if(isset($query) && $query =="/index.php" || $query =="/"){
+  
+  echo "index.php";
+  
+ }else{
     ?>
-
-    <div class="footer">
-                            
+    <div class="footer">                      
         <div class="col-xs-12 col-sm-6 col-md-6">
-        <p class="footer-text"> &copy; 2017 All right reserved by C-DAC </p>
+        <p class="footer-text"> &copy; 2018 All right reserved by C-DAC </p>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6">
         <p class="footer-textr"> Design by WDG & Developed by MDEG (HPC I&amp;E )</p>
         </div>
     </div>
+    
+<?php } ?>    

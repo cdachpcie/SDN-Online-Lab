@@ -57,3 +57,18 @@
     //}
 
     ?>
+    
+            <div class="footer-header" style="background-color: #fff">
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="login-logo">
+                      <img src="http://eindia.eletsonline.com/2017/wp-content/uploads/2016/09/Digital-India-300x200.png" alt="logo" class="img-responsive" style="max-width: 99px;">
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="login-logo">
+                      <img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFpRSvbGIIjnkm6b_WXXQ79Ms9XnK6v8JhByhk1dcx24ULYFdwFQ"  style="max-width: 66px;margin-left:260px; ">
+                    </div>
+                  </div>
+                </div>
+              </div>

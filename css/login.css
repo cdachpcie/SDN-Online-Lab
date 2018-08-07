@@ -106,7 +106,8 @@ ul {
 }
 
 .login-header .nav-tabs > li.active {
-    border-bottom: 6px solid #df3221;
+    //border-bottom: 6px solid #df3221;
+    border-bottom: 6px solid #009846;
 }
 
 .login-inner h1 {

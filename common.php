@@ -50,8 +50,8 @@
                 $link_array = explode('/',$link);
                 $page = end($link_array);
 
-              //  if($page = "index.php" || "login.php"){
-//echo $page;die;
+                //  if($page = "index.php" || "login.php"){
+                //echo $page;die;
                     define('BASE_PATH', rtrim(str_replace($page, "", $_SERVER['SCRIPT_FILENAME']),"/")); 
               //  }
                 
@@ -215,6 +215,47 @@
             fwrite($write, $data);
             fclose($write);
         }
+        
+        
+        //////////////////////////////////////////////////////////////////
+        // Update JSON
+        //////////////////////////////////////////////////////////////////
+        
+        public static function updateJSON($file,$username,$namespace=""){
+           $path = DATA . "/";
+            if($namespace != ""){
+                $path = $path . $namespace . "/";
+                $path = preg_replace('#/+#','/',$path);
+                if(!is_dir($path)) mkdir($path);
+            }
+            $jsonString = file_get_contents($path . $file);
+            $jsonString = str_replace(["\n\r", "\r", "\n"], "", $jsonString);
+            $jsonString = str_replace("|*/?>","",str_replace("<?php/*|","",$jsonString));
+            $data = json_decode($jsonString,true);
+
+            foreach($data as $entry => $v){
+                if($v['username'] == $username){
+                    $data[$entry]['status'] = "1";
+                }
+            }
+            $data = "<?php\r\n/*|" . json_encode($data) . "|*/\r\n?>";       
+            $write = fopen($path . $file, 'w') or die("can't open file ".$path.$file);
+            fwrite($write, $data);
+            fclose($write);
+            session_start();
+            $_SESSION['message'] = 'Your email has been verified.Please login and enjoy SDN Online Lab. Happy Coding!';
+            header("Location: http://localhost/login.php");
+        }
+        
+        
+        public static function msg(){
+            session_start();
+            $_SESSION['message'] = 'Mail has been sent to Email Id.Please login and verify your account!';
+            header("Location: http://localhost/login.php");
+            exit();
+        }
+        
+        
 
         //////////////////////////////////////////////////////////////////
         // Format JSEND Response
@@ -261,20 +302,23 @@
         //////////////////////////////////////////////////////////////////
 
         public static function checkPath($path) {
-            if(file_exists(DATA . "/" . $_SESSION['user'] . '_acl.php')){
-                foreach (getJSON($_SESSION['user'] . '_acl.php') as $projects=>$data) {
-                    if (strpos($path, $data) === 0) {
-                        return true;
+            if(isset($_SESSION['user'])){
+               if(file_exists(DATA . "/" . $_SESSION['user'] . '_acl.php')){
+                    foreach (getJSON($_SESSION['user'] . '_acl.php') as $projects=>$data) {
+                        if (strpos($path, $data) === 0) {
+                            return true;
+                        }
+                    }
+                }else{
+                    foreach(getJSON('projects.php') as $project=>$data){
+                        if (strpos($path, $data['path']) === 0) {
+                            return true;
+                        }
                     }
                 }
-            } else {
-                foreach(getJSON('projects.php') as $project=>$data){
-                    if (strpos($path, $data['path']) === 0) {
-                        return true;
-                    }
-                }
+                return false; 
             }
-            return false;
+            
         }
 
 
@@ -321,6 +365,8 @@
     function checkSession(){ Common::checkSession(); }
     function getJSON($file,$namespace=""){ return Common::getJSON($file,$namespace); }
     function saveJSON($file,$data,$namespace=""){ Common::saveJSON($file,$data,$namespace); }
+    function updateJSON($file,$data,$namespace=""){ Common::updateJSON($file,$data,$namespace); }
+    function msg($msg){Common::showMsg($msg);}
     function formatJSEND($status,$data=false){ return Common::formatJSEND($status,$data); }
     function checkAccess() { return Common::checkAccess(); }
     function checkPath($path) { return Common::checkPath($path); }

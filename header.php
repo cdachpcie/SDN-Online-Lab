@@ -66,6 +66,7 @@ if(isset($_SESSION['theme'])) {
                 if(file_exists(PLUGINS . "/" . $plugin . "/screen.css")){
                     echo('<link rel="stylesheet" href="plugins/'.$plugin.'/screen.css">');
                 }
+                
             }
         }
     }

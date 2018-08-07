@@ -1,3 +1,3 @@
 <?php
-/*|[{"name":"OpenDaylightApplications","username":"admin","path":"applications"},{"name":"FirewallApplication","username":"admin","path":"FirewallApplication"}]|*/
+/*|[{"name":"OpenDaylightApplications","username":"admin","path":"applications"},{"name":"FirewallApplication","username":"admin","path":"FirewallApplication"},{"name":"MyFirstSdnApplication","username":"Sweta","path":"MyFirstSdnApplication"},{"name":"FirstProject","username":"Richa","path":"FirstProject"},{"name":"First","username":"Richa","path":"First"},{"name":"Demo","username":"Richa","path":"Demo"}]|*/
 ?>

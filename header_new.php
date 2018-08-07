@@ -20,6 +20,10 @@ $theme = THEME;
 if(isset($_SESSION['theme'])) {
   $theme = $_SESSION['theme'];
 }
+//print_r($_SESSION['user']);
+if($_SESSION['user'] == ''){
+  header("Location: login.php");
+}
 
 ?>
 <!doctype html>
@@ -77,7 +81,7 @@ if(isset($_SESSION['theme'])) {
 <link rel="icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
-  <script>
+   <script>
     var i18n = (function(lang) {
         return function(word,args) {
             var x;
@@ -132,8 +136,13 @@ if(isset($_SESSION['theme'])) {
             <div class="row header">    
                 <div class="col-xs-12 col-sm-6 col-md-6 logo"><img src="images/logo.png" alt="logo" class="img-responsive"/></div>
                 <div class="col-xs-12 col-sm-6 col-md-6 login text-right">
-                    <a href="<?php echo BASE_URL;?>/productlist.php"><button type="button" class="btn btn-primary">Project</button></a> 
-                    <a onclick="codiad.settings.show();"><button type="button" class="btn btn-success">Settings</button></a> 
+                    <a href="<?php echo BASE_URL;?>/productlist.php"><button type="button" class="btn btn-primary">Project</button></a>
+                    <?php //print_r($_SESSION);
+                    if($_SESSION['user'] == 'admin'){?>
+                    <a href="<?php echo BASE_URL;?>/userlist.php"><button type="button" class="btn btn-success">UserList</button></a>
+                    <?php }else{ ?>
+                    <a onclick="codiad.user.setting();"><button type="button" class="btn btn-success">Setting</button></a> 
+                    <?php } ?>
                     <a href="#"><button type="button" class="btn btn-info">Help</button></a> 
                     <a onclick="codiad.user.logout();"><button type="button" class="btn btn-warning">Logout</button></a>
                 </div>

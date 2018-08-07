@@ -1,0 +1,150 @@
+
+#div1 {
+    width: 740px;
+    height: 450px;
+    /*padding: 10px;*/
+    /*border: 1px solid #aaaaaa;*/
+}
+.dropped{
+	background-color: gray;
+}
+.header{
+    background: #D9D9D9;
+    border-bottom: 1px solid grey;
+    padding: 10px;
+	width: 100%
+}
+.left-side{
+    background: #D9D9D9;
+    margin-left: -15px;
+    width: 195%;
+}
+.logo-adjust{
+    margin: 10px;
+	height: 40px;
+	width: 59px;
+}
+.logo-adjusts{
+    margin: 10px;
+	height: 40px;
+	width: 59px;
+}
+#mydiv1{
+/*    position: absolute;*/
+}
+.drag1 {
+    position:absolute;  
+}
+.header span {
+    font-size: 14px;
+    padding: 10px;
+}
+/* Run Pop UP css start*/
+
+   .popup{
+    width: 900px;
+    margin: auto;
+    text-align: center
+}
+.popup img{
+    width: 200px;
+    height: 200px;
+    cursor: pointer
+}
+.shows{
+    z-index: 999;
+    display: none;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 5%;
+	padding: 10px;
+}
+.shows .overlay{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.66);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.shows .img-show{
+    width: 600px;
+    height: 400px;
+    background: #FFF;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    overflow: hidden
+}
+.img-shows span{
+    position: absolute;
+    top: 3%;
+    right: 12%;
+    z-index: 99;
+    cursor: pointer;
+}
+.img-shows img{
+  /*  width: 50%;
+    height: 75%;*/
+    position: absolute;
+  /*  top: 40px;
+    left: 20%;*/
+}
+/*End style*/
+
+/* Run Pop UP code end*/
+
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+	width: 20%;
+	left: 12%;
+	top: 100%;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block;}
+
+
+.inactive { 
+    border: 2px solid #F00 !important;
+    cursor: auto;
+}
+.active {
+    border: 2px solid #0F0 !important;
+}
+
