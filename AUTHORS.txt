@@ -1,6 +1,7 @@
 Authors Ordered By First Contribution
 --------------------------------------------------
 
+SOL Team - @HPC-I&E(C-DAC)  <solsupport@cdac.in>
 Kent Safranski - @fluidbyte <kent@fluidbyte.net>
 Tim Holum - @tholum
 Gaurab Paul - @lorefnon
@@ -10,5 +11,6 @@ Luc Verdier - @Verdier
 Danny Morabito - @newsocialifecom <staff@newsocialife.com>
 Alexander D - @daeks
 Jean-Philippe Zolesio - @holblin
+codiad
 
 and all the other contributors - Thanks!
