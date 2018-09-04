@@ -1,6 +1,6 @@
 <?php
 /*
- * @author Shahrukh Khan
+ * @author Richa Jha
  * @website http://www.thesoftwareguy.in
  * @facebbok https://www.facebook.com/Thesoftwareguy7
  * @twitter https://twitter.com/thesoftwareguy7
