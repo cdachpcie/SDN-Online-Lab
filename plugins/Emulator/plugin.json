@@ -1,0 +1,10 @@
+[ { "author" : "Richa",
+    "version" : "1.0",
+    "name" : "Emulator",
+    "url" : "",
+    "rightbar" : [{
+        "action" : "codiad.terminal3.open3();",
+        "icon" : "icon-monitor",
+        "title" : "Emulator"
+        }]
+  } ]
