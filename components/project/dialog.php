@@ -35,23 +35,57 @@
             // Get projects JSON data
             $projects = getJSON('projects.php');
             sort($projects);
-            foreach($projects as $project=>$data){
+            
+            function filter_by_value ($array, $index, $value){
+                if(is_array($array) && count($array)>0) 
+                {
+                    foreach(array_keys($array) as $key){
+                        $temp[$key] = $array[$key][$index];
+                        
+                        if ($temp[$key] == $value){
+                            $newarray[$key] = $array[$key];
+                        }
+                    }
+                  }
+                  if(isset($newarray) && $newarray !=''){
+                    return $newarray;
+                  }
+      
+            }
+            
+            
+            $nResults = filter_by_value($projects, 'username', $_SESSION['user']);
+            
+            if(isset($_SESSION) && $_SESSION['user'] != 'admin'){
+        
+                $projects = $nResults; 
+            }
+            
+            if(($projects) && $projects != ''){
+                foreach($projects as $project=>$data){
                 $show = true;
                 if($projects_assigned && !in_array($data['path'],$projects_assigned)){ $show=false; }
-                if($show){
-                  if($_GET['trigger'] == 'true') {
-                ?>
-                <li onclick="codiad.project.open('<?php echo($data['path']); ?>');"><div class="icon-archive icon"></div><?php echo($data['name']); ?></li>
-                
-                <?php
-                } else {
-                ?>
-                <li ondblclick="codiad.project.open('<?php echo($data['path']); ?>');"><div class="icon-archive icon"></div><?php echo($data['name']); ?></li>
-                
-                <?php
+                    if($show){
+                      if($_GET['trigger'] == 'true') {
+                    ?>
+                    <li onclick="codiad.project.open('<?php echo($data['path']); ?>');"><div class="icon-archive icon"></div><?php echo($data['name']); ?></li>
+                    
+                    <?php
+                    } else {
+                    ?>
+                    <li ondblclick="codiad.project.open('<?php echo($data['path']); ?>');"><div class="icon-archive icon"></div><?php echo($data['name']); ?></li>
+                    
+                    <?php
+                    }
+                    }
                 }
-                }
-            } 
+            }
+            else
+            {
+                
+                echo "You have not created any project yet. To create project click on create button";
+                
+            }   
             ?>
             
             </ul>

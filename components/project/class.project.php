@@ -36,8 +36,10 @@ class Project extends Common
     public function __construct()
     {
         $this->projects = getJSON('projects.php');
-        if (file_exists(BASE_PATH . "/data/" . $_SESSION['user'] . '_acl.php')) {
-            $this->assigned = getJSON($_SESSION['user'] . '_acl.php');
+        if((isset($_SESSION['user']))){
+           if (file_exists(BASE_PATH . "/data/" . $_SESSION['user'] . '_acl.php')) {
+                $this->assigned = getJSON($_SESSION['user'] . '_acl.php');
+            }  
         }
     }
     
@@ -119,6 +121,7 @@ class Project extends Common
             }
             if ($this->path != '') {
                 $pass = $this->checkDuplicate();
+                //print_r($pass);die;
                 if ($pass) {
                     if (!$this->isAbsPath($this->path)) {
                         mkdir(WORKSPACE . '/' . $this->path);
@@ -159,6 +162,27 @@ class Project extends Common
                     }
                     
                     echo formatJSEND("success", array("name"=>$this->name,"username"=>$this->username,"path"=>$this->path));
+
+                    $src = $_SERVER['DOCUMENT_ROOT'].'/pox';
+                    $dst = WORKSPACE . '/' . $this->path; 
+                    if (!is_dir($dst)) mkdir($dst, 0777);
+                    function recurse_copy($src,$dst) {
+                        $dir = opendir($src);
+                        @mkdir($dst);
+                        while(false !== ( $file = readdir($dir)) ) {
+                            if (( $file != '.' ) && ( $file != '..' )) {
+                                if ( is_dir($src . '/' . $file) ) {
+                                    recurse_copy($src . '/' . $file,$dst . '/' . $file);
+                                }
+                                else {
+                                    copy($src . '/' . $file,$dst . '/' . $file);
+                                }
+                            }
+                        }
+                        closedir($dir);
+                    } 
+                    recurse_copy($src,$dst);
+
                 } else {
                     echo formatJSEND("error", "A Project With the Same Name or Path Exists");
                 }
